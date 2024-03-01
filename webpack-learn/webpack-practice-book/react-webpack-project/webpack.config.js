@@ -10,6 +10,24 @@ module.exports = () => {
       open: true,
       port: 3000
     },
+    module: {
+      rules: [
+        {
+          test: /\.jsx?$/,
+          exclude: /node_modulses/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              cacheDirectory: true,
+              cacheCompression: false
+            }
+          }
+        }
+      ]
+    },
+    resolve: {
+      extensions: ['.js', '.jsx'] // 让jsx文件可以被Resolver自动识别（注意是 .js 非 js）
+    },
     plugins: [
       new HtmlWebpackPlugin({
         template: './public/index.html',
