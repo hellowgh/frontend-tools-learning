@@ -8,7 +8,10 @@ const isProduction = process.env.NODE_ENV.trim() === 'production';
 module.exports = () => {
   return {
     mode: isProduction ? 'production' : 'development',
-    entry: './src/index.tsx',
+    entry: {
+      index: './src/index.tsx',
+      details: './src/details.tsx',
+    },
     devServer: {
       open: true,
       port: 3000
@@ -54,8 +57,16 @@ module.exports = () => {
     },
     plugins: [
       new HtmlWebpackPlugin({
+        filename: 'index.html',
         template: './public/index.html',
-        title: 'react webpack project'
+        title: 'react webpack project',
+        chunks: ['index']
+      }),
+      new HtmlWebpackPlugin({
+        filename: 'details.html',
+        template: './public/index.html',
+        title: 'details',
+        chunks: ['details']
       }),
       isProduction && new MiniCssExtractPlugin({
         filename: '[name].css',
