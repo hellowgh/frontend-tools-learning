@@ -1,6 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 // 注意！脚本中执行set NODE_ENV=production && webpack build，会使得环境production后面有一个空格，因此要trim一下
 const isProduction = process.env.NODE_ENV.trim() === 'production';
@@ -18,6 +18,10 @@ module.exports = () => {
         dependOn: 'shared',
       },
       shared: ['react', 'react-dom'] // 这里将公共代码放在一个shared chunk中
+    },
+    output: {
+      chunkFilename: isProduction ? '[name].[chunkhash:8].chunk.js' : '[name].chunk.js',
+      filename: isProduction ? '[name].[contenthash:8].js' : '[name].js'
     },
     devServer: {
       open: true,
@@ -76,8 +80,8 @@ module.exports = () => {
         chunks: ['shared', 'details'] // 将这些chunk在HTML中引入
       }),
       isProduction && new MiniCssExtractPlugin({
-        filename: '[name].css',
-        chunkFilename: '[name].chunk.css'
+        filename: '[name].[contenthash:8].css',
+        chunkFilename: '[name].[contenthash:8].chunk.css'
       }),
       new CleanWebpackPlugin(),
     ].filter(Boolean)
