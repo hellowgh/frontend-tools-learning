@@ -9,8 +9,15 @@ module.exports = () => {
   return {
     mode: isProduction ? 'production' : 'development',
     entry: {
-      index: './src/index.tsx',
-      details: './src/details.tsx',
+      index: {
+        import: './src/index.tsx', // import表示入口文件路径
+        dependOn: 'shared' // dependOn表示入口文件的依赖的chunk
+      },
+      details: {
+        import: './src/details.tsx',
+        dependOn: 'shared',
+      },
+      shared: ['react', 'react-dom'] // 这里将公共代码放在一个shared chunk中
     },
     devServer: {
       open: true,
@@ -60,19 +67,19 @@ module.exports = () => {
         filename: 'index.html',
         template: './public/index.html',
         title: 'react webpack project',
-        chunks: ['index']
+        chunks: ['shared', 'index']
       }),
       new HtmlWebpackPlugin({
         filename: 'details.html',
         template: './public/index.html',
         title: 'details',
-        chunks: ['details']
+        chunks: ['shared', 'details'] // 将这些chunk在HTML中引入
       }),
       isProduction && new MiniCssExtractPlugin({
         filename: '[name].css',
         chunkFilename: '[name].chunk.css'
       }),
       new CleanWebpackPlugin(),
-    ]
+    ].filter(Boolean)
   }
 }
