@@ -7,6 +7,7 @@ import React from 'react'
  * 统一客户端和服务端渲染方式
  */
 import { createRoot } from 'react-dom/client'
+import './style/style.less'
 
 type Message = {
     title: string;
