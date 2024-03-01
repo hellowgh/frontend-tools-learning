@@ -38,6 +38,14 @@ module.exports = () => {
             'css-loader',
             'less-loader'
           ]
+        },
+        {
+          test: /\.(png|svg|jpg|jpeg|gif)$/i,
+          type: 'asset/resource', // mistake 注意这里是type
+        },
+        {
+          test: /\.(woff|woff2|eot|otf)$/i,
+          type: 'asset/resource'
         }
       ]
     },
