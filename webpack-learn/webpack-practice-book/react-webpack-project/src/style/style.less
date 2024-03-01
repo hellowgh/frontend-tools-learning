@@ -1,5 +1,16 @@
+@div-color: red;
+
+.span-style {
+  font-size: 25px;
+}
+
 body {
   div {
-    color: red;
+    color: @div-color;
   }
+}
+
+span {
+  @apply .span-style; // mistake 这里一定要加分号
+  margin-top: 20px;
 }

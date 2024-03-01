@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 
 // 注意！脚本中执行set NODE_ENV=production && webpack build，会使得环境production后面有一个空格，因此要trim一下
 const isProduction = process.env.NODE_ENV.trim() === 'production';
@@ -33,7 +34,7 @@ module.exports = () => {
         {
           test: /\.less$/,
           use: [
-            isProduction ? new MiniCssExtractPlugin.loader : 'style-loader',
+            isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
             'css-loader',
             'less-loader'
           ]
@@ -52,6 +53,7 @@ module.exports = () => {
         filename: '[name].css',
         chunkFilename: '[name].chunk.css'
       }),
+      new CleanWebpackPlugin(),
     ]
   }
 }
