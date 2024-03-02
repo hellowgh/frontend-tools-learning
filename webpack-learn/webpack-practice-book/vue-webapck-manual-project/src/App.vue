@@ -9,6 +9,15 @@ const msg = ref('msg')
 
 </script>
 
-<style scoped>
+<style scoped lang="less">
+@div-color: red;
 
+.div-common {
+    font-width: 700;
+}
+
+div {
+    @apply .div-common;
+    color: @div-color;
+}
 </style>
