@@ -1,3 +1,5 @@
 import './styles/index.css'
+import {createApp} from 'vue';
+import App from './App.vue';
 
-console.log(42342);
+createApp(App).mount('#app')
