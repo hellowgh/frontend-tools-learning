@@ -19,6 +19,8 @@ module.exports = () => ({
       template: './public/index.html',
       title: 'custom plugin'
     }),
-    new MyWebpackPlugin()
+    new MyWebpackPlugin({
+      name: 'plugin name'
+    })
   ]
 })
