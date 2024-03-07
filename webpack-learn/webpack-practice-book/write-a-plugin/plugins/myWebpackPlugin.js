@@ -24,10 +24,3 @@ class MyWebpackPlugin {
 }
 
 module.exports = MyWebpackPlugin;
-
-compiler.hooks.someHook.tapPromise('MyPlugin', async (arg) => {
-  // 处理异步逻辑并返回 Promise
-  setTimeout(() => {
-    return Promise.resolve();
-  })
-});
